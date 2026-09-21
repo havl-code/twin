@@ -1,0 +1,10 @@
+# Personal data, not for the public repo
+linkedin.pdf
+summary.txt
+fun_facts.txt
+
+__pycache__/
+*.pyc
+
+.env
+.venv/
