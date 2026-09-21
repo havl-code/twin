@@ -1,15 +1,18 @@
 :root {
-  --accent: #b8511f;
-  --accent-bright: #d9662f;
+  --accent: #b94f1e;
+  --accent-bright: #e67032;
   --accent-ink: #ffffff;
 
-  --bg: #efece6;
-  --surface: #ffffff;
-  --surface-2: #fbe9dc;
-  --border: #ddd6c8;
-  --border-strong: #c8bfab;
-  --text: #1c1a17;
-  --muted: #6b6459;
+  --bg: #f3a05c;
+  --surface: #fffdf9;
+  --surface-2: #fff0e2;
+  --border: #e5b48d;
+  --border-strong: #c98558;
+  --text: #2d1d13;
+  --muted: #754c37;
+  --focus-ring: rgba(230, 112, 50, 0.24);
+  --shadow-sm: 0 2px 6px rgba(105, 47, 16, 0.08);
+  --shadow-md: 0 16px 40px rgba(105, 47, 16, 0.16);
 }
 
 * { box-sizing: border-box; }
@@ -17,16 +20,18 @@
 html, body {
   margin: 0;
   padding: 0;
-  background: var(--bg);
+  background:
+    radial-gradient(circle at 14% 0%, rgba(255, 233, 205, 0.52), transparent 28rem),
+    radial-gradient(circle at 92% 18%, rgba(255, 197, 139, 0.5), transparent 27rem),
+    var(--bg);
   color: var(--text);
   font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
 .page {
-  width: 100%;
-  max-width: 880px;
+  width: min(100%, 920px);
   margin: 0 auto;
-  padding: 28px 24px 40px;
+  padding: 42px 28px 36px;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -43,11 +48,12 @@ html, body {
 .page-header h1 {
   display: flex;
   align-items: center;
-  gap: 10px;
-  font-size: 22px;
+  color: #fffdf9;
+  font-size: clamp(1.55rem, 3vw, 1.9rem);
   font-weight: 600;
-  letter-spacing: -0.01em;
-  margin: 0 0 4px;
+  letter-spacing: -0.045em;
+  line-height: 1.1;
+  margin: 3px 0 0;
 }
 
 .github-link {
@@ -55,78 +61,96 @@ html, body {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 34px;
-  height: 34px;
-  border-radius: 50%;
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
   color: var(--muted);
-  transition: color 0.12s ease, border-color 0.12s ease, transform 0.12s ease;
+  background: rgba(255, 253, 249, 0.72);
+  transition: color 0.16s ease, border-color 0.16s ease, background 0.16s ease, transform 0.16s ease;
   border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
 }
 .github-link:hover {
   color: var(--accent);
   border-color: var(--accent-bright);
+  background: var(--surface);
   transform: translateY(-1px);
+}
+
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin: 0;
+  color: var(--accent);
+  font-size: 0.69rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 .pulse-dot {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: var(--accent-bright);
-  box-shadow: 0 0 0 0 rgba(217, 102, 47, 0.45);
+  background: #5c9c76;
+  box-shadow: 0 0 0 0 rgba(92, 156, 118, 0.35);
   animation: pulse 2.4s ease-out infinite;
   flex: none;
 }
 @keyframes pulse {
-  0%   { box-shadow: 0 0 0 0 rgba(217, 102, 47, 0.45); }
-  70%  { box-shadow: 0 0 0 6px rgba(217, 102, 47, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(217, 102, 47, 0); }
+  0%   { box-shadow: 0 0 0 0 rgba(92, 156, 118, 0.35); }
+  70%  { box-shadow: 0 0 0 6px rgba(92, 156, 118, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(92, 156, 118, 0); }
 }
 @media (prefers-reduced-motion: reduce) {
   .pulse-dot { animation: none; }
 }
 
 .subtitle {
-  margin: 0;
-  color: var(--muted);
-  font-size: 14px;
+  margin: 14px 0 0;
+  color: #fff3e7;
+  font-size: 0.92rem;
+  line-height: 1.5;
 }
 
 .subtitle-fun {
-  margin: 4px 0 0;
-  color: var(--border-strong);
-  font-size: 12px;
+  margin: 2px 0 0;
+  color: #ffe0c5;
+  font-size: 0.78rem;
   font-style: italic;
 }
 
 /* ---------- Chat panel ---------- */
 .chat-panel {
-  background: var(--surface);
+  background: rgba(255, 253, 249, 0.92);
   border: 1px solid var(--border);
-  border-radius: 6px;
-  box-shadow: 0 1px 2px rgba(28, 26, 23, 0.04), 0 8px 24px rgba(28, 26, 23, 0.06);
-  margin-top: 20px;
+  border-radius: 20px;
+  box-shadow: var(--shadow-md);
+  margin-top: 26px;
   min-height: 460px;
   max-height: 62vh;
   overflow-y: auto;
-  padding: 20px;
+  padding: 26px;
 }
 
 /* ---------- Empty state / suggestions ---------- */
 .empty-state {
-  padding: 8px 2px 4px;
+  padding: 5px 2px 4px;
 }
 
 .empty-lede {
-  margin: 0 0 10px;
+  margin: 0 0 13px;
   color: var(--muted);
-  font-size: 14px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
 }
 
 .suggestion-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 10px;
+  gap: 12px;
 }
 
 .suggestion-card {
@@ -134,57 +158,36 @@ html, body {
   align-items: center;
   gap: 10px;
   text-align: left;
-  background: var(--surface);
+  background: linear-gradient(135deg, #ffffff, #fff8f0);
   border: 1px solid var(--border);
-  border-radius: 4px;
+  border-radius: 14px;
   color: var(--text);
   font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
-  font-size: 13.5px;
+  font-size: 0.85rem;
   line-height: 1.35;
-  padding: 12px 14px;
+  padding: 14px;
   cursor: pointer;
-  transition: border-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+  transition: border-color 0.18s ease, background 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease;
 }
 .suggestion-card:hover {
   border-color: var(--accent-bright);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 10px rgba(28, 26, 23, 0.06);
-}
-.suggestion-icon { font-size: 17px; flex: none; }
-
-.fun-row {
-  margin-top: 16px;
-  padding-top: 14px;
-  border-top: 1px dashed var(--border);
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-.fun-label {
-  font-size: 12px;
-  color: var(--muted);
-  margin-right: 2px;
-}
-.fun-chips {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-.fun-chip {
   background: var(--surface-2);
-  border: 1px dashed var(--border-strong);
-  border-radius: 999px;
-  color: var(--accent);
-  font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
-  font-size: 12.5px;
-  padding: 7px 13px;
-  cursor: pointer;
-  transition: border-color 0.15s ease, transform 0.15s ease;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(105, 47, 16, 0.1);
 }
-.fun-chip:hover {
-  border-color: var(--accent-bright);
-  transform: translateY(-2px) rotate(-0.5deg);
+.suggestion-card:focus-visible, .github-link:focus-visible, #send-btn:focus-visible {
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+.suggestion-icon {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  flex: none;
+  border-radius: 10px;
+  background: var(--surface-2);
+  font-size: 16px;
 }
 
 @media (max-width: 560px) {
@@ -194,7 +197,7 @@ html, body {
 .messages {
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 18px;
 }
 
 .msg-row {
@@ -214,37 +217,39 @@ html, body {
 
 .avatar {
   flex: none;
-  width: 26px;
-  height: 26px;
-  border-radius: 50%;
-  background: var(--surface-2);
-  border: 1px solid var(--border);
+  width: 34px;
+  height: 34px;
+  background: transparent;
+  border: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 13px;
-  margin-top: 2px;
+  font-size: 21px;
+  margin-top: 1px;
 }
 
 .bubble {
   max-width: 88%;
-  font-size: 15px;
-  line-height: 1.6;
-  padding: 10px 14px;
-  border-radius: 6px;
+  font-size: 0.94rem;
+  line-height: 1.65;
+  padding: 12px 15px;
+  border-radius: 16px;
 }
 
 .msg-row.user .bubble {
-  background: var(--surface-2);
-  border: 1px solid var(--border);
+  background: #ffe2cb;
+  border: 1px solid #f0bd98;
   color: var(--text);
   white-space: pre-wrap;
+  border-bottom-right-radius: 5px;
 }
 
 .msg-row.assistant .bubble {
-  border-left: 2px solid var(--accent-bright);
-  padding-left: 12px;
+  background: #fffdf9;
+  border: 1px solid #efd1bc;
+  border-bottom-left-radius: 5px;
   color: var(--text);
+  box-shadow: var(--shadow-sm);
 }
 
 .bubble p { margin: 0 0 8px; }
@@ -279,29 +284,31 @@ html, body {
 .input-row {
   display: flex;
   align-items: stretch;
-  gap: 10px;
-  margin-top: 16px;
+  gap: 12px;
+  margin-top: 18px;
 }
 
 #chat-input {
   flex: 1;
   resize: none;
-  background: var(--surface);
+  background: rgba(255, 253, 249, 0.94);
   border: 1px solid var(--border);
-  border-radius: 3px;
+  border-radius: 16px;
   color: var(--text);
   font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
-  font-size: 14px;
-  padding: 12px 14px;
+  font-size: 0.9rem;
+  padding: 13px 15px;
   line-height: 1.4;
-  min-height: 48px;
+  min-height: 52px;
   max-height: 160px;
-  transition: border-color 0.12s ease, box-shadow 0.12s ease;
+  box-shadow: var(--shadow-sm);
+  transition: border-color 0.16s ease, box-shadow 0.16s ease, background 0.16s ease;
 }
 #chat-input:focus {
   border-color: var(--accent-bright);
   outline: none;
-  box-shadow: 0 0 0 1px var(--accent-bright);
+  background: var(--surface);
+  box-shadow: 0 0 0 4px var(--focus-ring);
 }
 #chat-input::placeholder { color: var(--muted); }
 #chat-input:disabled { opacity: 0.6; }
@@ -309,18 +316,20 @@ html, body {
 #send-btn {
   background: var(--accent);
   border: 1px solid var(--accent);
-  border-radius: 3px;
+  border-radius: 16px;
   color: var(--accent-ink);
-  min-width: 52px;
+  min-width: 54px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: background 0.12s ease, border-color 0.12s ease, transform 0.08s ease;
+  box-shadow: 0 5px 12px rgba(185, 79, 30, 0.22);
+  transition: background 0.16s ease, border-color 0.16s ease, box-shadow 0.16s ease, transform 0.1s ease;
 }
 #send-btn:hover:not(:disabled) {
   background: var(--accent-bright);
   border-color: var(--accent-bright);
+  box-shadow: 0 7px 16px rgba(185, 79, 30, 0.28);
 }
 #send-btn:active:not(:disabled) { transform: scale(0.96); }
 #send-btn:disabled { opacity: 0.5; cursor: default; }
@@ -335,7 +344,7 @@ html, body {
 
 /* ---------- Mobile ---------- */
 @media (max-width: 640px) {
-  .page { padding: 20px 16px 32px; }
-  .chat-panel { min-height: 380px; padding: 14px; }
+  .page { padding: 26px 16px 28px; }
+  .chat-panel { min-height: 380px; padding: 18px; border-radius: 17px; }
   .bubble { max-width: 96%; }
 }

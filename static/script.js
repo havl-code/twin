@@ -6,22 +6,16 @@ const SUGGESTIONS = [
   { icon: "✨", text: "What's a fun fact most people don't know about you?" },
 ];
 
-const FUN_EXAMPLES = [
-  "If you had a superpower for a day, what would it be?",
-  "What's your go-to coffee or tea order?",
-];
-
 const PLACEHOLDERS = [
   "Type your question...",
   "What do you want to know about Hà?",
-  "Try: what's your superpower?",
-  "Curious about a project? Ask away.",
+  "Ask about experience, projects, or skills...",
+  "How can I get in touch with Hà?",
 ];
 
 const messagesEl = document.getElementById("messages");
 const emptyStateEl = document.getElementById("empty-state");
 const suggestionGridEl = document.getElementById("suggestion-grid");
-const funChipsEl = document.getElementById("fun-chips");
 const formEl = document.getElementById("chat-form");
 const inputEl = document.getElementById("chat-input");
 const sendBtn = document.getElementById("send-btn");
@@ -158,15 +152,6 @@ SUGGESTIONS.forEach(({ icon, text }) => {
   card.innerHTML = `<span class="suggestion-icon">${icon}</span><span>${text}</span>`;
   card.addEventListener("click", () => sendMessage(text));
   suggestionGridEl.appendChild(card);
-});
-
-FUN_EXAMPLES.forEach((text) => {
-  const chip = document.createElement("button");
-  chip.type = "button";
-  chip.className = "fun-chip";
-  chip.textContent = text;
-  chip.addEventListener("click", () => sendMessage(text));
-  funChipsEl.appendChild(chip);
 });
 
 // Cycle the placeholder text while the input is empty and unfocused.
